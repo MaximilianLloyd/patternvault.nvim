@@ -53,4 +53,15 @@ function M.read()
 	M.regexes = parsed
 end
 
+function M.edit_name(old_name, new_name)
+	M.regexes[new_name] = M.regexes[old_name]
+	M.regexes[old_name] = nil
+	M.save()
+end
+
+function M.edit_regex(name, regex)
+	M.regexes[name] = regex
+	M.save()
+end
+
 return M

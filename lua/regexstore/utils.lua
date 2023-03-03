@@ -22,4 +22,18 @@ function M.table_length(T)
   return count
 end
 
+function M.get_last_regex_from_history()
+	local latest = vim.fn.histget("search", -1)
+	return latest
+end
+
+function M.highlight_search(input) 
+		local len = string.len(input)
+		if (len > 0) then
+			return { { 0, len, "Search" } }
+		else
+			return {}
+		end
+end
+
 return M

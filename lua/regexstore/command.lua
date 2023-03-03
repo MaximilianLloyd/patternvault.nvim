@@ -3,8 +3,11 @@
 local command = {}
 
 local subcommands = {
+	add_latest = function()
+		require("regexstore").add_latest()
+	end,
 	add = function()
-		require("regexstore").input()
+		require("regexstore").add()
 	end,
 	remove = function()
 		require("regexstore").remove()
@@ -12,8 +15,11 @@ local subcommands = {
 	select = function()
 		require("regexstore").select()
 	end,
-	peek_definition = function()
-		print("Hello")
+	edit_name = function()
+		require("regexstore").edit_name()
+	end,
+	edit_regex = function()
+		require("regexstore").edit_regex()
 	end,
 }
 

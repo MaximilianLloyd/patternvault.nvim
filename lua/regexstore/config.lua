@@ -4,7 +4,6 @@ function M.defaults()
 	local defaults = {
 		yank_register = '"',
 		root = vim.fn.stdpath("config"),
-		regexes = {},
 	}
 	return defaults
 end
