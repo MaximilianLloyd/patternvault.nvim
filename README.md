@@ -2,13 +2,13 @@
 <div align="center">
 
 # PatternVault.nvim
-##### Don't loose your favorite search patterns.
+##### Persist your favorite patterns, use and manage them with ease.
 
 [![Lua](https://img.shields.io/badge/Lua-blue.svg?style=for-the-badge&logo=lua)](http://www.lua.org)
 </div>
 
 ## ⇁  WIP
-This is not fully baked. I've made a minimal MVP to validate the idea. If you experience any
+This is not fully baked. I've made a minimal version to validate the idea. If you experience any
 issues, see some improvement you think would be amazing, or just have some
 feedback for me , make an issue!
 
@@ -20,7 +20,7 @@ You're working on a codebase and write an clever search and replace pattern, but
 
 
 ## ⇁ The Solution:
-The ability to persist your search patterns and access them easily for later use.
+The ability to persist your search patterns and access them easily.
 
 
 ## ⇁ Installation:
@@ -30,10 +30,10 @@ The ability to persist your search patterns and access them easily for later use
 ### Packer
 ```lua
 use({
-    "MaximilianLloyd/PatternVault.nvim",
+    "MaximilianLloyd/patternvault.nvim",
     branch = "main",
     config = function()
-        require("PatternVault").setup({})
+        require("patternvault").setup({})
     end,
 })
 ```
@@ -42,10 +42,10 @@ use({
 ### Lazy
 ```lua
 {
-    "MaximilianLloyd/PatternVault.nvim",
+    "MaximilianLloyd/patternvault.nvim",
     event = "VeryLazy" -- Customize here as wanted,
     config = function() 
-        require("PatternVault").setup()
+        require("patternvault").setup()
     end
 },
 
@@ -53,7 +53,7 @@ use({
 
 ## Default options
 
-PatternVault provides a couple of.
+PatternVault provides a couple of options to customize the behaviour.
 
 ```lua
 	local defaults = {
@@ -67,37 +67,35 @@ PatternVault provides a couple of.
 
 ## Usage
 
-Basic usage.
+add_latest has an optional argument that specifies the history if you want to use another than the default. It defaults to the one defined in default options. I've only considered search and cmd currently. search grabs the latest, for cmnd it searches for the latest %s command.
 
-add_latest has an optional argument that specifies the history. It defaults to the one defined in default options. I've only considered search and cmd currently. search grabs the latest, for cmnd it searches for the latest %s command.
+All of your patterns are stored in a `patternvault.json` file that is stored by default in your neovim config directory.
 
 
 ### Add latest pattern
-```
+```vim
 PatternVault add_latest
 ```
 
 ### Add latest %s pattern
+```vim
+PatternVault add_latest search 
 ```
-PatternVault add_latest search
-```
-
 
 
 ### Select a pattern
 
-Uses `vim.ui.select` to select a stored pattern. Selecting will copy to your specified register.
+Uses `vim.ui.select` to select a stored pattern. With default options this will feed the pattern into the cmdline.
 
-```
+```vim
 PatternVault select
 ```
-
 
 ### Remove a pattern
 
 Removes a pattern from your list
 
-```
+```vim
 PatternVault remove
 ```
 
@@ -105,13 +103,6 @@ PatternVault remove
 
 Edits the name.
 
-```
+```vim
 PatternVault edit_name
 ```
-
--- 
-
-## Todo
-- [ ] Add an option to automatically open a select pattern
-
-
