@@ -18,11 +18,11 @@ The format may change later if/when more advanced functionality is added.
 
 
 ## ⇁ The Problem:
-You're working on a codebase and write an clever search and replace pattern, but you change machines or lose track of it somehow. Darn it!
+You're working on a big codebase and write a clever search and replace pattern, but you change machines or lose track of it somehow. Darn it!
 
 
 ## ⇁ The Solution:
-The ability to persist your patterns and access them easily.
+The ability to persist your patterns and access them easily with a human-readable name.
 
 
 ## ⇁ Installation:

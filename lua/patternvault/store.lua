@@ -37,25 +37,25 @@ function M.save()
 
 	local to_write = vim.fn.json_encode(to_save)
 	local data = file:write(to_write)
-	file:close()
+file:close()
 end
 
 function M.read()
-	-- Read the file
-	local file = io.open(Config.options.root .. "/patternvault.json", "r")
+-- Read the file
+local file = io.open(Config.options.root .. "/patternvault.json", "r")
 
-	if file == nil then
-		return nil
-	end
+if file == nil then
+	return nil
+end
 
-	local data = file:read("*all")
-	local parsed = vim.fn.json_decode(data)
+local data = file:read("*all")
+local parsed = vim.fn.json_decode(data)
 
-	for k, v in pairs(parsed) do
-		parsed[k] = decode(v)
-	end
+for k, v in pairs(parsed) do
+	parsed[k] = decode(v)
+end
 
-	M.patterns = parsed
+M.patterns = parsed
 end
 
 function M.edit_name(old_name, new_name)
