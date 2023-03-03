@@ -35,7 +35,7 @@ function M.select()
 			if Config.options.auto_open then
 				local is_subtitute = string.match(pattern, "^:%s?%s?[gs]?/.*")
 
-				if string.match(pattern, is_subtitute) then
+				if is_subtitute then
 					vim.api.nvim_feedkeys(":" .. pattern, "n", true)
 					return
 				end
