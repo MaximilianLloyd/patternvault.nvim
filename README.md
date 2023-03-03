@@ -45,7 +45,7 @@ use({
 ```lua
 {
     "MaximilianLloyd/patternvault.nvim",
-    event = "VeryLazy" -- Customize here as wanted,
+    event = "VeryLazy", -- Customize here as wanted
     config = function() 
         require("patternvault").setup()
     end

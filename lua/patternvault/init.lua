@@ -180,7 +180,4 @@ function M.edit_pattern()
 	end)
 end
 
-M.setup()
-M.add()
-
 return M
