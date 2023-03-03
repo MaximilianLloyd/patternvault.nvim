@@ -18,7 +18,7 @@ The format may change later if/when more advanced functionality is added.
 
 
 ## ⇁ The Problem:
-You're working on a codebase and write an clever search and replace pattern, but you loose it and now have to try and piece together how you did it
+You're working on a codebase and write an clever search and replace pattern, but you change machines or lose track of it somehow. Darn it!
 
 
 ## ⇁ The Solution:
@@ -58,7 +58,7 @@ use({
 PatternVault provides a couple of options to customize the behaviour.
 
 ```lua
-	local defaults = {
+	{
 		yank_register = '+',
 		root = vim.fn.stdpath("config"),
 		default_history = 'cmd',
@@ -69,7 +69,7 @@ PatternVault provides a couple of options to customize the behaviour.
 
 ## Usage
 
-add_latest has an optional argument that specifies the history if you want to use another than the default. It defaults to the one defined in default options. I've only considered search and cmd currently. search grabs the latest, for cmnd it searches for the latest %s command.
+add_latest has an optional argument that specifies the history if you want to use another than the default. It defaults to the dir specified in options. I've only considered search and cmd currently. search grabs the latest, for cmnd it searches for the latest %s command.
 
 All of your patterns are stored in a `patternvault.json` file that is stored by default in your neovim config directory.
 
@@ -88,7 +88,7 @@ PatternVault add_latest
 
 ### Select a pattern
 
-Uses `vim.ui.select` to select a stored pattern. With default options this will feed the pattern into the cmdline.
+Uses `vim.ui.select` to select a stored pattern. This will feed the pattern into the cmdline.
 
 ```vim
 PatternVault select
@@ -96,7 +96,7 @@ PatternVault select
 
 ### Remove a pattern
 
-Removes a pattern from your list
+Removes a pattern from your list.
 
 ```vim
 PatternVault remove

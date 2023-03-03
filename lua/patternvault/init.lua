@@ -129,16 +129,14 @@ function M.edit_name()
 		end,
 	}, function(prev_name, idx)
 		if prev_name then
-			vim.notify("Pattern name edited", vim.log.levels.INFO)
 
 			vim.ui.input({
 				prompt = "Enter a new name",
 				default = prev_name,
-				completion = "file",
 			}, function(new_name)
 				if new_name then
 					Store.edit_name(prev_name, new_name)
-					vim.notify("Pattern name", vim.log.levels.INFO)
+					vim.notify("Pattern name edited", vim.log.levels.INFO)
 				end
 			end)
 		end
@@ -164,12 +162,10 @@ function M.edit_pattern()
 		end,
 	}, function(prev_pattern, idx)
 		if prev_pattern then
-			vim.notify("Pattern name edited", vim.log.levels.INFO)
-
 			vim.ui.input({
 				prompt = "Enter a new pattern",
 				default = Utils.find_value(Store.patterns, prev_pattern),
-				completion = "file",
+				highlight = Utils.highlight_search,
 			}, function(new_pattern)
 				if new_pattern then
 					Store.edit_pattern(prev_pattern, new_pattern)
