@@ -7,6 +7,8 @@
 [![Lua](https://img.shields.io/badge/Lua-blue.svg?style=for-the-badge&logo=lua)](http://www.lua.org)
 </div>
 
+![PatternVault](patternvault_logo.png)
+
 ## ⇁  WIP
 This is not fully baked. I've made a minimal version to validate the idea. If you experience any
 issues, see some improvement you think would be amazing, or just have some
