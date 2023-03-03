@@ -22,7 +22,7 @@ You're working on a codebase and write an clever search and replace pattern, but
 
 
 ## ⇁ The Solution:
-The ability to persist your search patterns and access them easily.
+The ability to persist your patterns and access them easily.
 
 
 ## ⇁ Installation:
@@ -74,14 +74,15 @@ add_latest has an optional argument that specifies the history if you want to us
 All of your patterns are stored in a `patternvault.json` file that is stored by default in your neovim config directory.
 
 
+To get started try running `PaternVault add_latest` and then `PatternVault select`.
+
+
 ### Add latest pattern
+
+Adds the latest pattern from specified `default_history`
+
 ```vim
 PatternVault add_latest
-```
-
-### Add latest %s pattern
-```vim
-PatternVault add_latest search 
 ```
 
 
@@ -107,4 +108,12 @@ Edits the name.
 
 ```vim
 PatternVault edit_name
+```
+
+### Edit a pattern
+
+Edits the pattern.
+
+```vim
+PatternVault edit_patern
 ```
