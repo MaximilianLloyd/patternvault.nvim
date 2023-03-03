@@ -32,10 +32,12 @@ function M.select()
 		if item then
 			-- 
 			local pattern = Utils.find_value(Store.patterns, item)
-			if Config.options.auto_open then
-				local is_subtitute = string.match(pattern, "^:%s?%s?[gs]?/.*")
 
-				if is_subtitute then
+			if Config.options.auto_open then
+				-- @TODO: Not optimal
+				local sub = string.sub(pattern, 1, 2)
+
+				if (string.match(sub, "s")) then
 					vim.api.nvim_feedkeys(":" .. pattern, "n", true)
 					return
 				end
