@@ -1,25 +1,24 @@
 -- Define commands here
---
 local command = {}
 
 local subcommands = {
-	add_latest = function()
-		require("regexstore").add_latest()
+	add_latest = function(arg)
+		require("patternvault").add_latest(arg)
 	end,
 	add = function()
-		require("regexstore").add()
+		require("patternvault").add()
 	end,
 	remove = function()
-		require("regexstore").remove()
+		require("patternvault").remove()
 	end,
 	select = function()
-		require("regexstore").select()
+		require("patternvault").select()
 	end,
 	edit_name = function()
-		require("regexstore").edit_name()
+		require("patternvault").edit_name()
 	end,
-	edit_regex = function()
-		require("regexstore").edit_regex()
+	edit_pattern = function()
+		require("patternvault").edit_pattern()
 	end,
 }
 

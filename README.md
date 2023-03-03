@@ -1,8 +1,8 @@
 
 <div align="center">
 
-# Regexstore.nvim
-##### Don't loose your favorite regexes.
+# PatternVault.nvim
+##### Don't loose your favorite search patterns.
 
 [![Lua](https://img.shields.io/badge/Lua-blue.svg?style=for-the-badge&logo=lua)](http://www.lua.org)
 </div>
@@ -16,7 +16,7 @@ The format may change later if/when more advanced functionality is added.
 
 
 ## ⇁ The Problem:
-You're working on a codebase and write an clever search and replace regex, but you loose it and now have to try and piece together how you did it
+You're working on a codebase and write an clever search and replace pattern, but you loose it and now have to try and piece together how you did it
 
 
 ## ⇁ The Solution:
@@ -30,10 +30,10 @@ The ability to persist your search patterns and access them easily for later use
 ### Packer
 ```lua
 use({
-    "MaximilianLloyd/regexstore.nvim",
+    "MaximilianLloyd/PatternVault.nvim",
     branch = "main",
     config = function()
-        require("regexstore").setup({})
+        require("PatternVault").setup({})
     end,
 })
 ```
@@ -42,10 +42,10 @@ use({
 ### Lazy
 ```lua
 {
-    "MaximilianLloyd/regexstore.nvim",
+    "MaximilianLloyd/PatternVault.nvim",
     event = "VeryLazy" -- Customize here as wanted,
     config = function() 
-        require("regexstore").setup()
+        require("PatternVault").setup()
     end
 },
 
@@ -53,41 +53,52 @@ use({
 
 ## Default options
 
-Regexstore provides a couple of.
+PatternVault provides a couple of.
 
 ```lua
-{
-	yank_register = '"',
-	root = vim.fn.stdpath("config"), -- where to storethe regexstore.json file in your neovim config directory, for easy portability.
-}
-
+	local defaults = {
+		yank_register = '+',
+		root = vim.fn.stdpath("config"),
+		default_history = 'cmd',
+		auto_open = true, -- Feeds the pattern to the command line, so you can interact with it.
+		should_yank = false, -- Should the pattern be yanked to yank_register.
+	}
 ```
 
 ## Usage
 
 Basic usage.
 
+add_latest has an optional argument that specifies the history. It defaults to the one defined in default options. I've only considered search and cmd currently. search grabs the latest, for cmnd it searches for the latest %s command.
 
-### Add latest search pattern
+
+### Add latest pattern
 ```
-Regexstore add
-```
-
-### Select a regex
-
-Uses `vim.ui.select` to select a regex. It will show the name you stored it under and the regex. Selecting will copy to your specified register.
-
-```
-Regexstore select
+PatternVault add_latest
 ```
 
+### Add latest %s pattern
+```
+PatternVault add_latest search
+```
 
-### Remove a regex
 
-Removes a regex from your list
+
+### Select a pattern
+
+Uses `vim.ui.select` to select a stored pattern. Selecting will copy to your specified register.
 
 ```
-Regexstore remove
+PatternVault select
+```
+
+
+### Remove a pattern
+
+Removes a pattern from your list
+
+```
+PatternVault remove
 ```
 
 ### Edit name
@@ -95,9 +106,12 @@ Regexstore remove
 Edits the name.
 
 ```
-Regexstore edit_name
+PatternVault edit_name
 ```
 
-## Todo 
-- [ ] Edit regexes
+-- 
+
+## Todo
+- [ ] Add an option to automatically open a select pattern
+
 

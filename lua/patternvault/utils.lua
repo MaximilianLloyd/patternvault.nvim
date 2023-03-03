@@ -22,10 +22,32 @@ function M.table_length(T)
   return count
 end
 
-function M.get_last_regex_from_history()
-	local latest = vim.fn.histget("search", -1)
+-- search / cmd
+function M.get_last_pattern_from_history(history)
+	if (history == "cmd") then
+		return M.get_last_pattern_from_cmd()
+	end
+	
+	local latest = vim.fn.histget(history, -1)
 	return latest
 end
+
+function M.get_last_pattern_from_cmd()
+	local latest = vim.fn.histnr("cmd")
+	local match = nil
+
+	-- Search recursively for the last pattern
+	for i = latest, 1, -1 do
+		local cmd = vim.fn.histget("cmd", i)
+		if string.match(cmd, "s/") then
+			match = cmd
+			break
+		end
+	end
+
+	return match
+end
+
 
 function M.highlight_search(input) 
 		local len = string.len(input)

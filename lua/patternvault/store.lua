@@ -1,12 +1,12 @@
 -- File to handle writing and reading JSON
-local Config = require("regexstore.config")
--- local Utils = require("regexstore.utils")
+local Config = require("patternvault.config")
+-- local Utils = require("PatternVault.utils")
 
 local M = {
-	regexes = {},
+	patterns = {},
 }
 
--- To encode and decode the regexes
+-- To handle regexs
 function encode (to_encode)
 	return to_encode:gsub("\\", "\\\\")
 end
@@ -15,29 +15,27 @@ function decode (to_decode)
 	return to_decode:gsub("\\\\", "\\")
 end
 
-function M.add(name, regex)
-	M.regexes[name] = encode(regex)
+function M.add(name, pattern)
+	M.patterns[name] = encode(pattern)
 	M.save()
-	vim.notify("Regex added", vim.log.levels.INFO)
 end
 
 function M.remove(name)
-	M.regexes[name] = nil
+	M.patterns[name] = nil
 	M.save()
 end
 
 function M.save()
 	-- Read the file
-	local file = io.open(Config.options.root .. "/regexstore.json", "w")
-	local to_write = vim.fn.json_encode(M.regexes)
+	local file = io.open(Config.options.root .. "/patternvault.json", "w")
+	local to_write = vim.fn.json_encode(M.patterns)
 	local data = file:write(to_write)
-
 	file:close()
 end
 
 function M.read()
 	-- Read the file
-	local file = io.open(Config.options.root .. "/regexstore.json", "r")
+	local file = io.open(Config.options.root .. "/patternvault.json", "r")
 
 	if file == nil then
 		return nil
@@ -50,17 +48,17 @@ function M.read()
 		parsed[k] = decode(v)
 	end
 
-	M.regexes = parsed
+	M.patterns = parsed
 end
 
 function M.edit_name(old_name, new_name)
-	M.regexes[new_name] = M.regexes[old_name]
-	M.regexes[old_name] = nil
+	M.patterns[new_name] = M.patterns[old_name]
+	M.patterns[old_name] = nil
 	M.save()
 end
 
-function M.edit_regex(name, regex)
-	M.regexes[name] = regex
+function M.edit_pattern(name, pattern)
+	M.patterns[name] = pattern
 	M.save()
 end
 
