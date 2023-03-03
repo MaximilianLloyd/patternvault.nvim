@@ -16,7 +16,7 @@ function decode (to_decode)
 end
 
 function M.add(name, pattern)
-	M.patterns[name] = encode(pattern)
+	M.patterns[name] = pattern
 	M.save()
 end
 
@@ -28,7 +28,14 @@ end
 function M.save()
 	-- Read the file
 	local file = io.open(Config.options.root .. "/patternvault.json", "w")
-	local to_write = vim.fn.json_encode(M.patterns)
+
+	local to_save = {}
+
+	for k, v in pairs(M.patterns) do
+		to_save[k] = encode(v)
+	end
+
+	local to_write = vim.fn.json_encode(to_save)
 	local data = file:write(to_write)
 	file:close()
 end

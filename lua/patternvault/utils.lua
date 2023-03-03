@@ -39,9 +39,10 @@ function M.get_last_pattern_from_cmd()
 	-- Search recursively for the last pattern
 	for i = latest, 1, -1 do
 		local cmd = vim.fn.histget("cmd", i)
-		if string.match(cmd, "s/") then
+		if string.sub(cmd, 1, 2) == "%s" then
 			match = cmd
 			break
+			-- cmd = string.sub(cmd, 2)
 		end
 	end
 

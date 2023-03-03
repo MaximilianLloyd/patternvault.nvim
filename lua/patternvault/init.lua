@@ -30,16 +30,24 @@ function M.select()
 		end,
 	}, function(item, idx)
 		if item then
+			-- 
 			local pattern = Utils.find_value(Store.patterns, item)
-			if (Config.options.auto_open) then
-				vim.api.nvim_feedkeys(":" .. pattern, "n", true)
+			if Config.options.auto_open then
+				local is_subtitute = string.match(pattern, "^:%s?%s?[gs]?/.*")
+
+				if string.match(pattern, is_subtitute) then
+					vim.api.nvim_feedkeys(":" .. pattern, "n", true)
+					return
+				end
+
+				vim.api.nvim_feedkeys("/" .. pattern, "n", true)
 			end
 
-			if (Config.options.should_yank) then
+			if Config.options.should_yank then
 				vim.fn.setreg(Config.options.yank_register, pattern)
 			end
 		else
-			print("You cancelled")
+			-- print("You cancelled")
 		end
 	end)
 end
@@ -66,7 +74,7 @@ function M.remove()
 			Store.remove(item)
 			vim.notify("Pattern removed", vim.log.levels.INFO)
 		else
-			print("You cancelled")
+			-- print("You cancelled")
 		end
 	end)
 end
@@ -74,14 +82,6 @@ end
 function M.add()
 	vim.ui.input({
 		prompt = "Enter a name for your pattern: ",
-		completion = "file",
-		highlight = function(input)
-			if string.len(input) > 8 then
-				return { { 0, 8, "Search" } }
-			else
-				return {}
-			end
-		end,
 	}, function(name)
 		if name then
 			vim.ui.input({
@@ -90,7 +90,7 @@ function M.add()
 			}, function(pattern)
 				if pattern then
 					Store.add(name, pattern)
-					print(pattern)
+					-- print(pattern)
 				end
 			end)
 		end
